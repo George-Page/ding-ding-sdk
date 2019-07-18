@@ -30,6 +30,9 @@ const (
 
 // 审批常量
 const (
+	TASK_ACTION_TYPE_AND = "AND"
+	TASK_ACTION_TYPE_OR = "OR"
+	TASK_ACTION_TYPE_NONE = "NONE"
 	CC_Position_Start = "START"
 	CC_Position_Finish = "FINISH"
 	CC_Position_Start_Finish = "START_FINISH"
