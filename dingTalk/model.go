@@ -27,6 +27,12 @@ type AccessTokenRsp struct {
 	ExpiresIn   int    `json:"expires_in"`
 }
 
+// 创建审批人会签/或签参数
+type ProcessInstanceApproverVo struct {
+	UserIds []string `json:"user_ids"`
+	TaskActionType string `json:"task_action_type"`
+}
+
 // create bpms_instance_task
 type BpmsInstanceTaskRsp struct {
 	ErrCode           int    `json:"errcode"`

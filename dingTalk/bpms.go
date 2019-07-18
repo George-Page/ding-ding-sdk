@@ -57,6 +57,11 @@ func (b *BpmsInstance) SetApprovers(approvers string) {
 	b.createInstance["approvers"] = approvers
 }
 
+// 审批人列表，支持会签/或签，优先级高于approvers变量
+func (b *BpmsInstance) SetApproversV2(vo ProcessInstanceApproverVo) {
+	b.createInstance["approvers_v2"] = vo
+}
+
 // starting -------------------
 // 抄送人userid列表，最大列表长度：20。多个抄送人用逗号分隔。该参数需要与cc_position参数一起传，抄送人才能生效。
 func (b *BpmsInstance) SetCClist(cclist string) {
