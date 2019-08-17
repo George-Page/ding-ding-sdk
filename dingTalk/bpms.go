@@ -106,6 +106,7 @@ func (b *BpmsInstance) GetAccessToken() AccessTokenRsp {
 func (b *BpmsInstance) CreateTaskInstance(gateWay, accessToken string) (task *BpmsInstanceTaskRsp, err error) {
 
 	p, err := json.Marshal(b.createInstance)
+	b.createInstance = make(map[string]interface{}, 0)
 	if err != nil {
 		return nil, err
 	}

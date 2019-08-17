@@ -29,8 +29,8 @@ type AccessTokenRsp struct {
 
 // 创建审批人会签/或签参数
 type ProcessInstanceApproverVo struct {
-	UserIds []string `json:"user_ids"`
-	TaskActionType string `json:"task_action_type"`
+	UserIds        []string `json:"user_ids"`
+	TaskActionType string   `json:"task_action_type"`
 }
 
 // create bpms_instance_task
@@ -193,3 +193,65 @@ type Role struct {
 }
 
 // ending ----------------------------------------------------
+
+// 钉钉消息通知
+type MessageNotify struct {
+	ErrCode int    `json:"errcode"`
+	ErrMsg  string `json:"errmsg"`
+	TaskId  int `json:"task_id"`
+}
+
+// 文字消息
+type TextMessage struct {
+	MsgType string `json:"msgtype"` // 消息类型
+	Text TextNotify `json:"text"`
+}
+
+type TextNotify struct {
+	Content string `json:"content"` // 必填; 消息内容，建议500字符以内
+}
+
+// 链接消息
+type LinkMessage struct {
+	MsgType string `json:"msgtype"`
+	Link link `json:"link"`
+}
+
+type link struct {
+	MessageUrl string `json:"messageUrl"` // 必填; 消息点击链接地址，当发送消息为小程序时支持小程序跳转链接
+	PicUrl string `json:"picUrl"` // 必填; 图片地址
+	Title string `json:"title"` // 必填; 消息标题，建议100字符以内
+	Text string `json:"text"` // 必填; 消息描述，建议500字符以内
+}
+
+// OA消息
+type OAMessage struct {
+	MsgType string `json:"msgtype"`
+	OA oa `json:"oa"`
+}
+
+type oa struct {
+	MessageUrl string `json:"message_url"` // 必填; 消息点击链接地址，当发送消息为小程序时支持小程序跳转链接
+	PcMessageUrl string `json:"pc_message_url"` // 选填; PC端点击消息时跳转到的地址
+	Head OaHead `json:"head"` // 必填; 消息头部内容
+	Body OaBody `json:"body"` // 必填; 消息体
+	Content string `json:"content"` // 选填; 消息体的内容，最多显示3行
+	Image string `json:"image"` // 选填; 消息体中的图片，支持图片资源@mediaId
+	FileCount string `json:"file_count"` // 选填; 消息点击链接地址，当发送消息为小程序时支持小程序跳转链接
+	Author string `json:"author"` // 选填; 自定义的作者名字
+}
+
+type OaHead struct {
+	BgColor string `json:"bgcolor"` // 必填; 消息头部的背景颜色。长度限制为8个英文字符，其中前2为表示透明度，后6位表示颜色值。不要添加0x
+	Text string `json:"text"` // 必填; 消息的头部标题 (向普通会话发送时有效，向企业会话发送时会被替换为微应用的名字)，长度限制为最多10个字符
+}
+
+type OaBody struct {
+	Title string `json:"title"` // 选填; 消息体的标题，建议50个字符以内
+	Form []oaBodyForm `json:"form"` // 选填; 消息体的表单，最多显示6个，超过会被隐藏　
+}
+
+type oaBodyForm struct {
+	Key string `json:"key"` // 选填; 消息体的关键字
+	Value string `json:"value"` // 选填; 消息体的关键字对应的值
+}
