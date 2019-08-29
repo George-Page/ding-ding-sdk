@@ -53,7 +53,7 @@ func TestNotifyInstance_WorkMessageOAType(t *testing.T) {
 	form = append(form, oaBodyForm{Key: "体重：", Value: "130KG"})
 	form = append(form, oaBodyForm{Key: "学历：", Value: "高中"})
 	form = append(form, oaBodyForm{Key: "爱好：", Value: "打篮球、听歌"})
-	msg.OA.Body = OaBody{Title:"车险快到期了", Form: form}
+	msg.OA.Body = OaBody{Title:"车险提醒", Form: form}
 	work.SetMsg(msg)
 	task, err := work.WorkMessage(test_data.TestWorkNotifyUrl, work.GetAccessToken().AccessToken)
 	log.Logf("create notify task:%#v", task)
